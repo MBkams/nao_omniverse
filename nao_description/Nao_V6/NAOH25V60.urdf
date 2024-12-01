@@ -1,0 +1,1116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="">
+    <link name="Torso">
+        <inertial>
+            <mass value="1.0495599508285522"/>
+            <inertia ixx="0.003083609277382493" ixy="1.4311580343928654e-05" ixz="-3.3021089620888233e-05" iyy="0.0028835022822022438" iyz="-2.7079340725322254e-05" izz="0.0015923978062346578"/>
+            <origin xyz="-0.0041299997828900814 0 0.04341999813914299"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoTorsoV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <link name="_HeadYaw">
+        <inertial>
+            <mass value="0.078419998288154602"/>
+            <inertia ixx="1.6032379789976403e-05" ixy="1.57000001888008e-09" ixz="3.1627624963448397e-09" iyy="1.7039368685800582e-05" iyz="-5.2949999940210546e-08" izz="5.5337222875095904e-06"/>
+            <origin xyz="-9.9999997473787516e-06 0 -0.027419999241828918"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoHeadYaw"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="HeadYaw" type="revolute">
+        <parent link="Torso"/>
+        <child link="_HeadYaw"/>
+        <origin xyz="0 0 0.12649999558925629"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-2.08566856" upper="2.08566856" effort="1.54700005" velocity="8.2679739"/>
+    </joint>
+    <link name="HeadYaw"/>
+    <joint name="_HeadYaw_fixedjoint" type="fixed">
+        <parent link="_HeadYaw"/>
+        <child link="HeadYaw"/>
+    </joint>
+    <link name="_HeadPitch">
+        <inertial>
+            <mass value="0.65973001718521118"/>
+            <inertia ixx="0.00068037351593375206" ixy="-1.8579128663986921e-05" ixz="4.7678418013674673e-06" iyy="0.00071470218244940042" iyz="9.6247749752365053e-06" izz="0.00077097048051655293"/>
+            <origin xyz="0.057185549288988113 0.0010888580000028014 0.0014627851778641343"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoHeadPitchV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="HeadPitch" type="revolute">
+        <parent link="_HeadYaw"/>
+        <child link="_HeadPitch"/>
+        <origin rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.671951771" upper="0.514872134" effort="1.53199995" velocity="7.19407272"/>
+    </joint>
+    <link name="HeadPitch"/>
+    <joint name="_HeadPitch_fixedjoint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="HeadPitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="CameraBottom"/>
+    <joint name="CameraBottom_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="CameraBottom"/>
+        <origin xyz="0.017740000039339066 0.050710000097751617 0" rpy="1.5707963267948966 -0 2.2636920378926488"/>
+    </joint>
+    <link name="CameraTop"/>
+    <joint name="CameraTop_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="CameraTop"/>
+        <origin xyz="0.063639998435974121 0.058710001409053802 0" rpy="1.5707963267948966 -0 1.5917402783011518"/>
+    </joint>
+    <link name="Gaze"/>
+    <joint name="Gaze_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="Gaze"/>
+        <origin xyz="0.042800001800060272 0.043000001460313797 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="Head/Touch/Front"/>
+    <joint name="Head/Touch/Front_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="Head/Touch/Front"/>
+        <origin xyz="0.10140000283718109 0.031199999153614044 0" rpy="1.5707963267948966 -0 0.38469678426997128"/>
+    </joint>
+    <link name="Head/Touch/Middle"/>
+    <joint name="Head/Touch/Middle_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="Head/Touch/Middle"/>
+        <origin xyz="0.10989999771118164 0.0010000000474974513 0" rpy="-1.5707963267948966 -3.1415926535897931 3.1415886535898032"/>
+    </joint>
+    <link name="Head/Touch/Rear"/>
+    <joint name="Head/Touch/Rear_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="Head/Touch/Rear"/>
+        <origin xyz="0.10450000315904617 -0.025699999183416367 0" rpy="-1.5707963267948966 -3.1415926535897931 2.9039893170504003"/>
+    </joint>
+    <link name="MicroFrontLeft"/>
+    <joint name="MicroFrontLeft_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="MicroFrontLeft"/>
+        <origin xyz="0.098581999540328979 0.020625999197363853 0.030937999486923218" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="MicroFrontRight"/>
+    <joint name="MicroFrontRight_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="MicroFrontRight"/>
+        <origin xyz="0.098581999540328979 0.020625999197363853 -0.030937999486923218" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="MicroRearLeft"/>
+    <joint name="MicroRearLeft_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="MicroRearLeft"/>
+        <origin xyz="0.0774260014295578 -0.021544000133872032 0.055771999061107635" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="MicroRearRight"/>
+    <joint name="MicroRearRight_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="MicroRearRight"/>
+        <origin xyz="0.0774260014295578 -0.021544000133872032 -0.055771999061107635" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="MicrophoneFrame"/>
+    <joint name="MicrophoneFrame_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="MicrophoneFrame"/>
+        <origin xyz="0.08800400048494339 -0.00045900046825408936 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="SpeakerLeft"/>
+    <joint name="SpeakerLeft_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="SpeakerLeft"/>
+        <origin xyz="0.05260000005364418 0.0038000000640749931 0.045299999415874481" rpy="1.5707963267948968 -1.5708003267948865 1.5707963267948966"/>
+    </joint>
+    <link name="SpeakerRight"/>
+    <joint name="SpeakerRight_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="SpeakerRight"/>
+        <origin xyz="0.05260000005364418 0.0038000000640749931 -0.045299999415874481" rpy="1.5707963267948966 1.5708003267948865 1.5707963267948966"/>
+    </joint>
+    <link name="Wifi"/>
+    <joint name="Wifi_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="Wifi"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="Head"/>
+    <joint name="Head_joint" type="fixed">
+        <parent link="_HeadPitch"/>
+        <child link="Head"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_LShoulderPitch">
+        <inertial>
+            <mass value="0.093039996922016144"/>
+            <inertia ixx="1.8302525859326124e-05" ixy="1.8877592822263978e-09" ixz="-2.0601110009010881e-06" iyy="2.0186234905850142e-05" iyz="3.6659170632447058e-07" izz="1.3900485100748483e-05"/>
+            <origin xyz="-0.0016499999910593033 -0.00014000000373926014 -0.026629999279975891"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 0"/>
+            <geometry>
+                <mesh filename="naoLShoulderPitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LShoulderPitch" type="revolute">
+        <parent link="Torso"/>
+        <child link="_LShoulderPitch"/>
+        <origin xyz="0 0.097999997437000275 0.10000000149011612" rpy="-1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-2.08566856" upper="2.08566856" effort="1.329" velocity="8.2679739"/>
+    </joint>
+    <link name="LShoulderPitch"/>
+    <joint name="_LShoulderPitch_fixedjoint" type="fixed">
+        <parent link="_LShoulderPitch"/>
+        <child link="LShoulderPitch"/>
+        <origin rpy="1.5707963267948966 -0 0"/>
+    </joint>
+    <link name="_LShoulderRoll">
+        <inertial>
+            <mass value="0.15776999294757843"/>
+            <inertia ixx="0.00027471227804198861" ixy="2.5338102204841562e-05" ixz="-4.7143862502707634e-07" iyy="8.7180997070390731e-05" iyz="-1.4212973837857135e-05" izz="0.00024181163462344557"/>
+            <origin xyz="0.0056300000287592411 -0.024550000205636024 0.0032999999821186066"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoLShoulderRollV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LShoulderRoll" type="revolute">
+        <parent link="_LShoulderPitch"/>
+        <child link="_LShoulderRoll"/>
+        <origin rpy="1.5707963267948966 -1.5707963267948966 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.314159274" upper="1.32645023" effort="1.78349996" velocity="7.19407272"/>
+    </joint>
+    <link name="LShoulderRoll"/>
+    <joint name="_LShoulderRoll_fixedjoint" type="fixed">
+        <parent link="_LShoulderRoll"/>
+        <child link="LShoulderRoll"/>
+        <origin rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+    </joint>
+    <link name="_LElbowYaw">
+        <inertial>
+            <mass value="0.064829997718334198"/>
+            <inertia ixx="2.7629412215901539e-05" ixy="2.9224094078017515e-07" ixz="-1.8400000412199802e-09" iyy="5.5958794291655067e-06" iyz="4.2099999042477521e-09" izz="2.6617864932632074e-05"/>
+            <origin xyz="0 -0.00014000000373926014 -0.02744000032544136"/>
+        </inertial>
+    </link>
+    <joint name="LElbowYaw" type="revolute">
+        <parent link="_LShoulderRoll"/>
+        <child link="_LElbowYaw"/>
+        <origin xyz="0.014999999664723873 -0.10499999672174454 0" rpy="1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-2.08566856" upper="2.08566856" effort="1.54700005" velocity="8.2679739"/>
+    </joint>
+    <link name="LElbowYaw"/>
+    <joint name="_LElbowYaw_fixedjoint" type="fixed">
+        <parent link="_LElbowYaw"/>
+        <child link="LElbowYaw"/>
+        <origin rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_LElbowRoll">
+        <inertial>
+            <mass value="0.077610000967979431"/>
+            <inertia ixx="3.8383699575206265e-05" ixy="-3.2315197131538298e-06" ixz="-1.3919391506078682e-07" iyy="2.4674565793247893e-05" iyz="1.5822109844521037e-06" izz="3.5970773751614615e-05"/>
+            <origin xyz="0.0028099999763071537 -0.025560000911355019 0.00076000002445653081"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoLElbowRoll"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LElbowRoll" type="revolute">
+        <parent link="_LElbowYaw"/>
+        <child link="_LElbowRoll"/>
+        <origin rpy="-1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.54461634" upper="-0.0349065848" effort="1.53199995" velocity="7.19407272"/>
+    </joint>
+    <link name="LElbowRoll"/>
+    <joint name="_LElbowRoll_fixedjoint" type="fixed">
+        <parent link="_LElbowRoll"/>
+        <child link="LElbowRoll"/>
+        <origin rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+    </joint>
+    <link name="_LWristYaw">
+        <inertial>
+            <mass value="0.18533000349998474"/>
+            <inertia ixx="0.00013322803715709597" ixy="-2.8725353331537917e-06" ixz="2.6753914426080883e-06" iyy="6.8647692387457937e-05" iyz="1.1546535461093299e-07" izz="0.00013575641787610948"/>
+            <origin xyz="-0.0008800000068731606 0.0030799999367445707 0.03434000164270401"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+            <geometry>
+                <mesh filename="naoWristYawV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LWristYaw" type="revolute">
+        <parent link="_LElbowRoll"/>
+        <child link="_LWristYaw"/>
+        <origin xyz="0 -0.055950000882148743 0" rpy="1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.82386911" upper="1.82386911" effort="0.407499999" velocity="24.6229305"/>
+    </joint>
+    <link name="LWristYaw"/>
+    <joint name="_LWristYaw_fixedjoint" type="fixed">
+        <parent link="_LWristYaw"/>
+        <child link="LWristYaw"/>
+        <origin rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LHand/Touch/Back"/>
+    <joint name="LHand/Touch/Back_joint" type="fixed">
+        <parent link="_LWristYaw"/>
+        <child link="LHand/Touch/Back"/>
+        <origin xyz="0 0.02500000037252903 0.037999998778104782" rpy="3.1415926535897931 -0 1.5707963267948966"/>
+    </joint>
+    <link name="LHand/Touch/Left"/>
+    <joint name="LHand/Touch/Left_joint" type="fixed">
+        <parent link="_LWristYaw"/>
+        <child link="LHand/Touch/Left"/>
+        <origin xyz="0.02500000037252903 0.0030000000260770321 0.032000001519918442" rpy="-1.5707963267948966 -0 0"/>
+    </joint>
+    <link name="LHand/Touch/Right"/>
+    <joint name="LHand/Touch/Right_joint" type="fixed">
+        <parent link="_LWristYaw"/>
+        <child link="LHand/Touch/Right"/>
+        <origin xyz="-0.02500000037252903 0.0035000001080334187 0.035000000149011612" rpy="1.5707963267948966 -0 3.1415926535897931"/>
+    </joint>
+    <link name="_LHand"/>
+    <joint name="LHand" type="prismatic">
+        <parent link="_LWristYaw"/>
+        <child link="_LHand"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="0" upper="1" effort="0.291999996" velocity="8.32999992"/>
+    </joint>
+    <link name="_LFinger11">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LFinger11" type="continuous">
+        <parent link="_LWristYaw"/>
+        <child link="_LFinger11"/>
+        <origin xyz="0.01157000008970499 -0.0030400000978261232 0.069069996476173401" rpy="-1.5707963294389258 -2.5706954797979109 1.7453293042616163"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LFinger12">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LFinger12" type="continuous">
+        <parent link="_LFinger11"/>
+        <child link="_LFinger12"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LFinger13">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalaxEnd"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LFinger13" type="continuous">
+        <parent link="_LFinger12"/>
+        <child link="_LFinger13"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LFinger21">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LFinger21" type="continuous">
+        <parent link="_LWristYaw"/>
+        <child link="_LFinger21"/>
+        <origin xyz="-0.01157000008970499 -0.0030400000978261232 0.069069996476173401" rpy="-1.5707963272498189 -2.5706954797979109 1.3962634365310076"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LFinger22">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LFinger22" type="continuous">
+        <parent link="_LFinger21"/>
+        <child link="_LFinger22"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LFinger23">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalaxEnd"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LFinger23" type="continuous">
+        <parent link="_LFinger22"/>
+        <child link="_LFinger23"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LThumb1">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LThumb1" type="continuous">
+        <parent link="_LWristYaw"/>
+        <child link="_LThumb1"/>
+        <origin xyz="0 -0.02638000063598156 0.04895000159740448" rpy="1.5707971274405346 -1.6180947748345449 1.5707956363231368"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_LThumb2">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalaxEnd"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_LThumb2" type="continuous">
+        <parent link="_LThumb1"/>
+        <child link="_LThumb2"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="LHand"/>
+    <joint name="_LHand_fixedjoint" type="fixed">
+        <parent link="_LElbowRoll"/>
+        <child link="LHand"/>
+    </joint>
+    <link name="LArm"/>
+    <joint name="LArm_joint" type="fixed">
+        <parent link="_LWristYaw"/>
+        <child link="LArm"/>
+        <origin xyz="0 -0.012310000136494637 0.057750001549720764" rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_LHipYawPitch">
+        <inertial>
+            <mass value="0.069810003042221069"/>
+            <inertia ixx="4.7635501687182114e-05" ixy="2.7151468202646356e-06" ixz="-1.1889039797097212e-06" iyy="3.4794451494235545e-05" iyz="-1.3147505342203658e-05" izz="3.831450521829538e-05"/>
+            <origin xyz="0.01093892939388752 -0.0078099998645484447 -0.026693252846598625"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="2.3561944901923448 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoLHipYawPitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LHipYawPitch" type="revolute">
+        <parent link="Torso"/>
+        <child link="_LHipYawPitch"/>
+        <origin xyz="0 0.05000000074505806 -0.085000000894069672" rpy="-3.1415926535897931 -0.78539816339744828 1.5707963267948966"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.14528501" upper="0.740717709" effort="3.34800005" velocity="4.16173744"/>
+    </joint>
+    <link name="LHipYawPitch"/>
+    <joint name="_LHipYawPitch_fixedjoint" type="fixed">
+        <parent link="_LHipYawPitch"/>
+        <child link="LHipYawPitch"/>
+        <origin rpy="2.3561944901923448 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_LHipRoll">
+        <inertial>
+            <mass value="0.14053000509738922"/>
+            <inertia ixx="5.4369131248677149e-05" ixy="2.1407156225450308e-07" ixz="7.1289309744315688e-06" iyy="6.0824564570793882e-05" iyz="6.5360484313714551e-07" izz="2.3844513634685427e-05"/>
+            <origin xyz="-0.0051500000990927219 -0.0002899999963119626 -0.015490000136196613"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+            <geometry>
+                <mesh filename="naoLHipRoll"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LHipRoll" type="revolute">
+        <parent link="_LHipYawPitch"/>
+        <child link="_LHipRoll"/>
+        <origin rpy="-1.5707963267948966 0.78539816339744828 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.379434586" upper="0.790459633" effort="3.34800005" velocity="4.16173744"/>
+    </joint>
+    <link name="LHipRoll"/>
+    <joint name="_LHipRoll_fixedjoint" type="fixed">
+        <parent link="_LHipRoll"/>
+        <child link="LHipRoll"/>
+        <origin rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_LHipPitch">
+        <inertial>
+            <mass value="0.38967999815940857"/>
+            <inertia ixx="0.0004653584910556674" ixy="-7.9102901509031653e-06" ixz="2.1129560536792269e-06" iyy="0.0003010980726685375" iyz="5.6412922276649624e-05" izz="0.00050984416157007217"/>
+            <origin xyz="-0.05372999981045723 0.0013800000306218863 0.0022100000642240047"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoLHipPitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LHipPitch" type="revolute">
+        <parent link="_LHipRoll"/>
+        <child link="_LHipPitch"/>
+        <origin rpy="1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.53588974" upper="0.483979791" effort="3.023" velocity="6.40239143"/>
+    </joint>
+    <link name="LHipPitch"/>
+    <joint name="_LHipPitch_fixedjoint" type="fixed">
+        <parent link="_LHipPitch"/>
+        <child link="LHipPitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_LKneePitch">
+        <inertial>
+            <mass value="0.30142000317573547"/>
+            <inertia ixx="0.0003880842705257237" ixy="6.0195270634721965e-06" ixz="3.7058432553749299e-06" iyy="0.00018551609537098557" iyz="-3.0900784622645006e-05" izz="0.00044617120875045657"/>
+            <origin xyz="-0.049359999597072601 0.0045300000347197056 0.0022499999031424522"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoLKneePitchV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LKneePitch" type="revolute">
+        <parent link="_LHipPitch"/>
+        <child link="_LKneePitch"/>
+        <origin xyz="-0.10000000149011612 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.0923279151" upper="2.11254644" effort="3.023" velocity="6.40239143"/>
+    </joint>
+    <link name="LKneePitch"/>
+    <joint name="_LKneePitch_fixedjoint" type="fixed">
+        <parent link="_LKneePitch"/>
+        <child link="LKneePitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_LAnklePitch">
+        <inertial>
+            <mass value="0.13415999710559845"/>
+            <inertia ixx="6.7942972236778587e-05" ixy="2.8484879521784023e-07" ixz="-8.8321208124853001e-09" iyy="5.4826949053676799e-05" iyz="4.2754882088047452e-06" izz="3.2203373848460615e-05"/>
+            <origin xyz="0.0068500000052154064 0.00044999999227002263 0.0002899999963119626"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoLAnklePitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LAnklePitch" type="revolute">
+        <parent link="_LKneePitch"/>
+        <child link="_LAnklePitch"/>
+        <origin xyz="-0.10289999842643738 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.18944192" upper="0.922581017" effort="3.023" velocity="6.40239143"/>
+    </joint>
+    <link name="LAnklePitch"/>
+    <joint name="_LAnklePitch_fixedjoint" type="fixed">
+        <parent link="_LAnklePitch"/>
+        <child link="LAnklePitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_LAnkleRoll">
+        <inertial>
+            <mass value="0.17183999717235565"/>
+            <inertia ixx="0.00041284644976258278" ixy="-3.7345853343140334e-07" ixz="-2.1056330297142267e-06" iyy="0.0003530241665430367" iyz="-8.7192511273315176e-06" izz="8.7291089585050941e-05"/>
+            <origin xyz="-0.032389998435974121 -0.0032999999821186066 0.025420000776648521"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+            <geometry>
+                <mesh filename="naoLAnkleRollV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="LAnkleRoll" type="revolute">
+        <parent link="_LAnklePitch"/>
+        <child link="_LAnkleRoll"/>
+        <origin rpy="-1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.39776054" upper="0.768992066" effort="3.34800005" velocity="4.16173744"/>
+    </joint>
+    <link name="LAnkleRoll"/>
+    <joint name="_LAnkleRoll_fixedjoint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LAnkleRoll"/>
+        <origin rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LFoot/Bumper/Left"/>
+    <joint name="LFoot/Bumper/Left_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LFoot/Bumper/Left"/>
+        <origin xyz="-0.035300001502037048 -0.018999999389052391 0.087600000202655792" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LFoot/Bumper/Right"/>
+    <joint name="LFoot/Bumper/Right_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LFoot/Bumper/Right"/>
+        <origin xyz="-0.035300001502037048 0.014000000432133675 0.087600000202655792" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LFoot/FSR/FrontLeft"/>
+    <joint name="LFoot/FSR/FrontLeft_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LFoot/FSR/FrontLeft"/>
+        <origin xyz="-0.045109998434782028 -0.029899999499320984 0.070249997079372406" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LFoot/FSR/FrontRight"/>
+    <joint name="LFoot/FSR/FrontRight_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LFoot/FSR/FrontRight"/>
+        <origin xyz="-0.045109998434782028 0.023099999874830246 0.070249997079372406" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LFoot/FSR/RearLeft"/>
+    <joint name="LFoot/FSR/RearLeft_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LFoot/FSR/RearLeft"/>
+        <origin xyz="-0.045109998434782028 -0.029899999499320984 -0.030249999836087227" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LFoot/FSR/RearRight"/>
+    <joint name="LFoot/FSR/RearRight_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LFoot/FSR/RearRight"/>
+        <origin xyz="-0.045109998434782028 0.019099999219179153 -0.029650000855326653" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="LLeg"/>
+    <joint name="LLeg_joint" type="fixed">
+        <parent link="_LAnkleRoll"/>
+        <child link="LLeg"/>
+        <origin xyz="-0.045109998434782028 0 0" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_RHipYawPitch">
+        <inertial>
+            <mass value="0.069810003042221069"/>
+            <inertia ixx="5.1836057537002489e-05" ixy="-4.1967628021666314e-06" ixz="-5.7121164900308941e-06" iyy="4.4694028474623337e-05" iyz="1.1044506209145766e-05" izz="4.1148130549117923e-05"/>
+            <origin xyz="0.01093892939388752 -0.0078099998645484447 0.026693252846598625"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0.78539816339744828 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoRHipYawPitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RHipYawPitch" type="continuous">
+        <parent link="Torso"/>
+        <child link="_RHipYawPitch"/>
+        <origin xyz="0 -0.05000000074505806 -0.085000000894069672" rpy="-3.1415926535897931 -2.3561944901923448 1.5707963267948966"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="LHipYawPitch"/>
+    </joint>
+    <link name="RHipYawPitch"/>
+    <joint name="_RHipYawPitch_fixedjoint" type="fixed">
+        <parent link="_RHipYawPitch"/>
+        <child link="RHipYawPitch"/>
+        <origin rpy="0.78539816339744828 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_RHipRoll">
+        <inertial>
+            <mass value="0.14053000509738922"/>
+            <inertia ixx="5.4372718295780942e-05" ixy="-2.1239156922092661e-07" ixz="7.1023509917722549e-06" iyy="6.0823967942269519e-05" iyz="-6.1208481838548323e-07" izz="2.3847514967201278e-05"/>
+            <origin xyz="-0.0051500000990927219 0.0002899999963119626 -0.015490000136196613"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+            <geometry>
+                <mesh filename="naoRHipRoll"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RHipRoll" type="revolute">
+        <parent link="_RHipYawPitch"/>
+        <child link="_RHipRoll"/>
+        <origin rpy="-1.5707963267948966 -0.78539816339744828 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.790459633" upper="0.379434586" effort="3.34800005" velocity="4.16173744"/>
+    </joint>
+    <link name="RHipRoll"/>
+    <joint name="_RHipRoll_fixedjoint" type="fixed">
+        <parent link="_RHipRoll"/>
+        <child link="RHipRoll"/>
+        <origin rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_RHipPitch">
+        <inertial>
+            <mass value="0.38967999815940857"/>
+            <inertia ixx="0.00046649971045553684" ixy="7.0956302806735039e-06" ixz="-2.0279860564187402e-06" iyy="0.00030133291147649288" iyz="5.6989250879269093e-05" izz="0.0005106066819280386"/>
+            <origin xyz="-0.05372999981045723 0.0013800000306218863 -0.0022100000642240047"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoRHipPitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RHipPitch" type="revolute">
+        <parent link="_RHipRoll"/>
+        <child link="_RHipPitch"/>
+        <origin rpy="1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.53588974" upper="0.483979791" effort="3.02259994" velocity="6.40239143"/>
+    </joint>
+    <link name="RHipPitch"/>
+    <joint name="_RHipPitch_fixedjoint" type="fixed">
+        <parent link="_RHipPitch"/>
+        <child link="RHipPitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_RKneePitch">
+        <inertial>
+            <mass value="0.30142000317573547"/>
+            <inertia ixx="0.00038771057734265924" ixy="-5.0003363867290318e-06" ixz="-3.9687233766017016e-06" iyy="0.00018374141654931009" iyz="-3.9400852983817458e-05" izz="0.00044692115625366569"/>
+            <origin xyz="-0.049359999597072601 0.0045300000347197056 -0.0022499999031424522"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoRKneePitchV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RKneePitch" type="revolute">
+        <parent link="_RHipPitch"/>
+        <child link="_RKneePitch"/>
+        <origin xyz="-0.10000000149011612 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.0923279151" upper="2.11254644" effort="3.02259994" velocity="6.40239143"/>
+    </joint>
+    <link name="RKneePitch"/>
+    <joint name="_RKneePitch_fixedjoint" type="fixed">
+        <parent link="_RKneePitch"/>
+        <child link="RKneePitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_RAnklePitch">
+        <inertial>
+            <mass value="0.13415999710559845"/>
+            <inertia ixx="6.798852700740099e-05" ixy="-2.7108879407933273e-07" ixz="4.6832120403905719e-08" iyy="5.4874668421689421e-05" iyz="4.2882079469563905e-06" izz="3.2201722206082195e-05"/>
+            <origin xyz="0.0068500000052154064 0.00044999999227002263 -0.0002899999963119626"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoRAnklePitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RAnklePitch" type="revolute">
+        <parent link="_RKneePitch"/>
+        <child link="_RAnklePitch"/>
+        <origin xyz="-0.10289999842643738 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.18630028" upper="0.932005823" effort="3.02259994" velocity="6.40239143"/>
+    </joint>
+    <link name="RAnklePitch"/>
+    <joint name="_RAnklePitch_fixedjoint" type="fixed">
+        <parent link="_RAnklePitch"/>
+        <child link="RAnklePitch"/>
+        <origin rpy="1.5707963267948966 -0 1.5707963267948966"/>
+    </joint>
+    <link name="_RAnkleRoll">
+        <inertial>
+            <mass value="0.17183999717235565"/>
+            <inertia ixx="0.00041212450014427304" ixy="4.817084118258208e-07" ixz="-2.3518368834629655e-06" iyy="0.00035215553361922503" iyz="8.5399206000147387e-06" izz="8.7151303887367249e-05"/>
+            <origin xyz="-0.032389998435974121 0.0032999999821186066 0.025420000776648521"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+            <geometry>
+                <mesh filename="naoRAnkleRollV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RAnkleRoll" type="revolute">
+        <parent link="_RAnklePitch"/>
+        <child link="_RAnkleRoll"/>
+        <origin rpy="-1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.768992066" upper="0.39776054" effort="3.34800005" velocity="4.16173744"/>
+    </joint>
+    <link name="RAnkleRoll"/>
+    <joint name="_RAnkleRoll_fixedjoint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RAnkleRoll"/>
+        <origin rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RFoot/Bumper/Left"/>
+    <joint name="RFoot/Bumper/Left_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RFoot/Bumper/Left"/>
+        <origin xyz="-0.035300001502037048 -0.014000000432133675 0.087600000202655792" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RFoot/Bumper/Right"/>
+    <joint name="RFoot/Bumper/Right_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RFoot/Bumper/Right"/>
+        <origin xyz="-0.035300001502037048 0.018999999389052391 0.087600000202655792" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RFoot/FSR/FrontLeft"/>
+    <joint name="RFoot/FSR/FrontLeft_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RFoot/FSR/FrontLeft"/>
+        <origin xyz="-0.045109998434782028 -0.023099999874830246 0.070249997079372406" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RFoot/FSR/FrontRight"/>
+    <joint name="RFoot/FSR/FrontRight_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RFoot/FSR/FrontRight"/>
+        <origin xyz="-0.045109998434782028 0.029899999499320984 0.070249997079372406" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RFoot/FSR/RearLeft"/>
+    <joint name="RFoot/FSR/RearLeft_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RFoot/FSR/RearLeft"/>
+        <origin xyz="-0.045109998434782028 -0.019099999219179153 -0.030249999836087227" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RFoot/FSR/RearRight"/>
+    <joint name="RFoot/FSR/RearRight_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RFoot/FSR/RearRight"/>
+        <origin xyz="-0.045109998434782028 0.029899999499320984 -0.029650000855326653" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RLeg"/>
+    <joint name="RLeg_joint" type="fixed">
+        <parent link="_RAnkleRoll"/>
+        <child link="RLeg"/>
+        <origin xyz="-0.045109998434782028 0 0" rpy="3.1415926535897931 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_RShoulderPitch">
+        <inertial>
+            <mass value="0.093039996922016144"/>
+            <inertia ixx="1.8302525859326124e-05" ixy="1.8877592822263978e-09" ixz="2.0601110009010881e-06" iyy="2.0186234905850142e-05" iyz="-3.6659170632447058e-07" izz="1.3900485100748483e-05"/>
+            <origin xyz="-0.0016499999910593033 -0.00014000000373926014 0.026629999279975891"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5707963267948966 -0 0"/>
+            <geometry>
+                <mesh filename="naoRShoulderPitch"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RShoulderPitch" type="revolute">
+        <parent link="Torso"/>
+        <child link="_RShoulderPitch"/>
+        <origin xyz="0 -0.097999997437000275 0.10000000149011612" rpy="-1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-2.08566856" upper="2.08566856" effort="1.329" velocity="8.2679739"/>
+    </joint>
+    <link name="RShoulderPitch"/>
+    <joint name="_RShoulderPitch_fixedjoint" type="fixed">
+        <parent link="_RShoulderPitch"/>
+        <child link="RShoulderPitch"/>
+        <origin rpy="1.5707963267948966 -0 0"/>
+    </joint>
+    <link name="_RShoulderRoll">
+        <inertial>
+            <mass value="0.15776999294757843"/>
+            <inertia ixx="0.0002707700477913022" ixy="-5.4884891142137349e-05" ixz="-9.1670717665692791e-06" iyy="0.00010340137669118121" iyz="-1.3264332665130496e-05" izz="0.00025452853878960013"/>
+            <origin xyz="-0.0056300000287592411 -0.024550000205636024 0.0032999999821186066"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoRShoulderRollV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RShoulderRoll" type="revolute">
+        <parent link="_RShoulderPitch"/>
+        <child link="_RShoulderRoll"/>
+        <origin rpy="1.5707963267948966 -1.5707963267948966 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.32645023" upper="0.314159274" effort="1.78299999" velocity="7.19407272"/>
+    </joint>
+    <link name="RShoulderRoll"/>
+    <joint name="_RShoulderRoll_fixedjoint" type="fixed">
+        <parent link="_RShoulderRoll"/>
+        <child link="RShoulderRoll"/>
+        <origin rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+    </joint>
+    <link name="_RElbowYaw">
+        <inertial>
+            <mass value="0.064829997718334198"/>
+            <inertia ixx="2.7629412215901539e-05" ixy="2.9224094078017515e-07" ixz="-1.8400000412199802e-09" iyy="5.5958794291655067e-06" iyz="4.2099999042477521e-09" izz="2.6617864932632074e-05"/>
+            <origin xyz="0 -0.00014000000373926014 -0.02744000032544136"/>
+        </inertial>
+    </link>
+    <joint name="RElbowYaw" type="revolute">
+        <parent link="_RShoulderRoll"/>
+        <child link="_RElbowYaw"/>
+        <origin xyz="-0.014999999664723873 -0.10499999672174454 0" rpy="1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-2.08566856" upper="2.08566856" effort="1.54700005" velocity="8.2679739"/>
+    </joint>
+    <link name="RElbowYaw"/>
+    <joint name="_RElbowYaw_fixedjoint" type="fixed">
+        <parent link="_RElbowYaw"/>
+        <child link="RElbowYaw"/>
+        <origin rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+    </joint>
+    <link name="_RElbowRoll">
+        <inertial>
+            <mass value="0.077610000967979431"/>
+            <inertia ixx="3.8471862353617325e-05" ixy="3.2417997317679692e-06" ixz="1.3880391236398282e-07" iyy="2.473305539751891e-05" iyz="9.0645096406660741e-07" izz="3.5931941965827718e-05"/>
+            <origin xyz="-0.0028099999763071537 -0.025560000911355019 0.00076000002445653081"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+            <geometry>
+                <mesh filename="naoRElbowRoll"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RElbowRoll" type="revolute">
+        <parent link="_RElbowYaw"/>
+        <child link="_RElbowRoll"/>
+        <origin rpy="-1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="0.0349065848" upper="1.54461634" effort="1.53199995" velocity="7.19407272"/>
+    </joint>
+    <link name="RElbowRoll"/>
+    <joint name="_RElbowRoll_fixedjoint" type="fixed">
+        <parent link="_RElbowRoll"/>
+        <child link="RElbowRoll"/>
+        <origin rpy="3.1415926535897931 -3.1415926535897931 1.5707963267948966"/>
+    </joint>
+    <link name="_RWristYaw">
+        <inertial>
+            <mass value="0.18533000349998474"/>
+            <inertia ixx="0.00013322803715709597" ixy="-2.8725353331537917e-06" ixz="3.6800283851334825e-06" iyy="6.8647692387457937e-05" iyz="1.1316515156067908e-05" izz="0.00013575641787610948"/>
+            <origin xyz="0.0008800000068731606 0.0030799999367445707 0.03434000164270401"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+            <geometry>
+                <mesh filename="naoWristYawV6"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="RWristYaw" type="revolute">
+        <parent link="_RElbowRoll"/>
+        <child link="_RWristYaw"/>
+        <origin xyz="0 -0.055950000882148743 0" rpy="1.5707963267948966 -0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.82386911" upper="1.82386911" effort="0.407499999" velocity="24.6229305"/>
+    </joint>
+    <link name="RWristYaw"/>
+    <joint name="_RWristYaw_fixedjoint" type="fixed">
+        <parent link="_RWristYaw"/>
+        <child link="RWristYaw"/>
+        <origin rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+    </joint>
+    <link name="RHand/Touch/Back"/>
+    <joint name="RHand/Touch/Back_joint" type="fixed">
+        <parent link="_RWristYaw"/>
+        <child link="RHand/Touch/Back"/>
+        <origin xyz="0 0.02500000037252903 0.037999998778104782" rpy="3.1415926535897931 -0 1.5707963267948966"/>
+    </joint>
+    <link name="RHand/Touch/Left"/>
+    <joint name="RHand/Touch/Left_joint" type="fixed">
+        <parent link="_RWristYaw"/>
+        <child link="RHand/Touch/Left"/>
+        <origin xyz="0.02500000037252903 0.0030000000260770321 0.032000001519918442" rpy="-1.5707963267948966 -0 0"/>
+    </joint>
+    <link name="RHand/Touch/Right"/>
+    <joint name="RHand/Touch/Right_joint" type="fixed">
+        <parent link="_RWristYaw"/>
+        <child link="RHand/Touch/Right"/>
+        <origin xyz="-0.02500000037252903 0.0035000001080334187 0.035000000149011612" rpy="1.5707963267948966 -0 3.1415926535897931"/>
+    </joint>
+    <link name="_RHand"/>
+    <joint name="RHand" type="prismatic">
+        <parent link="_RWristYaw"/>
+        <child link="_RHand"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="0" upper="1" effort="0.291999996" velocity="8.32999992"/>
+    </joint>
+    <link name="_RFinger11">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RFinger11" type="continuous">
+        <parent link="_RWristYaw"/>
+        <child link="_RFinger11"/>
+        <origin xyz="0.01157000008970499 -0.0030400000978261232 0.069069996476173401" rpy="-1.5707963294389258 -2.5706954797979109 1.7453293042616163"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RFinger12">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RFinger12" type="continuous">
+        <parent link="_RFinger11"/>
+        <child link="_RFinger12"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RFinger13">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalaxEnd"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RFinger13" type="continuous">
+        <parent link="_RFinger12"/>
+        <child link="_RFinger13"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RFinger21">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RFinger21" type="continuous">
+        <parent link="_RWristYaw"/>
+        <child link="_RFinger21"/>
+        <origin xyz="-0.01157000008970499 -0.0030400000978261232 0.069069996476173401" rpy="-1.5707963272498189 -2.5706954797979109 1.3962634365310076"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RFinger22">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RFinger22" type="continuous">
+        <parent link="_RFinger21"/>
+        <child link="_RFinger22"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RFinger23">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalaxEnd"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RFinger23" type="continuous">
+        <parent link="_RFinger22"/>
+        <child link="_RFinger23"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RThumb1">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalax"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RThumb1" type="continuous">
+        <parent link="_RWristYaw"/>
+        <child link="_RThumb1"/>
+        <origin xyz="0 -0.02638000063598156 0.04895000159740448" rpy="1.5707971274405346 -1.6180947748345449 1.5707956363231368"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="_RThumb2">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 -0 0"/>
+            <geometry>
+                <mesh filename="naoPhalaxEnd"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="_RThumb2" type="continuous">
+        <parent link="_RThumb1"/>
+        <child link="_RThumb2"/>
+        <origin xyz="0.014360000379383564 0 0" rpy="3.1415926535897931 -3.1415926535897931 2.1416935005867788"/>
+        <axis xyz="0 0 1"/>
+        <mimic joint="RHand" multiplier="0.999899149"/>
+    </joint>
+    <link name="RHand"/>
+    <joint name="_RHand_fixedjoint" type="fixed">
+        <parent link="_RElbowRoll"/>
+        <child link="RHand"/>
+    </joint>
+    <link name="RArm"/>
+    <joint name="RArm_joint" type="fixed">
+        <parent link="_RWristYaw"/>
+        <child link="RArm"/>
+        <origin xyz="0 -0.012310000136494637 0.057750001549720764" rpy="-1.5707963267948966 -1.5707963267948966 0"/>
+    </joint>
+    <material name="NaoMat/MainSkin">
+        <color rgba="0.90000000000000002 0.90000000000000002 0.90000000000000002 1"/>
+    </material>
+</robot>

@@ -9,3 +9,8 @@ An attempt to integrate Nao into Issac Sim
 
 2. Simulate Nao Motion
 3. Driving Nao via ROS messages
+
+## To do
+- Tutorial with Rigid Body 
+
+
